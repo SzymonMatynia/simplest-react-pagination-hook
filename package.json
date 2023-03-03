@@ -1,7 +1,7 @@
 {
   "name": "simplest-react-pagination-hook",
-  "version": "1.0.0",
-  "description": "React use-pagination-hook is a simple hook that allows you to easily implement pagination in your react app.",
+  "version": "1.0.310",
+  "description": "This is a simple hook that allows you to easily implement pagination in your React app.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -22,8 +22,10 @@
     "dist/**/*"
   ],
   "keywords": [
-    "outside component click react",
-    "react outside click"
+    "react pagination",
+    "react pagination hook",
+    "use pagination hook",
+    "simple react pagination"
   ],
   "author": "Szymon Matynia",
   "license": "MIT",

@@ -1,11 +1,15 @@
 # React simplest use pagination hook
 
-React use-pagination-hook is a simple hook that allows you to easily implement pagination in your react app.
+This is a simple hook that allows you to easily implement pagination in your React app.
 
 # Simple example
 
+### This is how the example looks like:
+![image](https://user-images.githubusercontent.com/31554149/222844538-3c2adb28-98dd-4415-ab41-4544f8761fb0.png)
+
+### Code below:
 ```js
-import {useEffect} from 'react'
+import {useEffect} from 'react';
 import usePagination from 'simplest-react-pagination-hook';
 
 
@@ -37,3 +41,5 @@ const SomeComponentUsingPagination = () => {
     )
 }
 ```
+
+
