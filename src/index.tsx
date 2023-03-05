@@ -1,55 +1,31 @@
-import {ReactNode, useEffect, useState} from 'react';
-
-export interface UsePaginationChangeEvent {
-  take: number;
-  skip: number;
-  currentPage: number;
-}
-
-export interface UsePaginationProps {
-  take?: number;
-  showCurrentPage?: boolean;
-  showGoToFirstPage?: boolean;
-  showGoToLastPage?: boolean;
-  totalItems: number;
-  totalItemsReferCurrentPage?: boolean;
-  prevPageText?: string;
-  nextPageText?: string;
-  goToFirstPageText?: string;
-  goToLastPageText?: string;
-  prevPageClassnames?: string;
-  pageNumberClassnames?: string;
-  nextPageClassnames?: string;
-  containerClassnames?: string;
-  goToFirstPageClassnames?: string;
-  goToLastPageClassnames?: string;
-  onChange?: (parameters: UsePaginationChangeEvent) => void;
-}
-
-export interface UsePagination {
-  pagination: ReactNode;
-  take: number;
-  skip: number;
-  currentPage: number;
-}
+import {useEffect, useState} from 'react';
+import {UsePaginationProps} from './types/use-pagination-props';
+import {UsePagination} from './types/use-pagination';
 
 const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination => {
   const [currentPage, setCurrentPage] = useState<number>(0);
 
+  // Reset current page when total items or take changes
   useEffect(() => {
-    if (props.onChange) props.onChange({take, skip: currentPage * take, currentPage});
-  }, [currentPage, take])
+    setCurrentPage(0);
+  }, [props.totalItems, take])
+
+  const handleOnChange = () => {
+    if (props.onChange) props.onChange({take, skip: currentPage * take, currentPage})
+  }
 
   const nextPage = () => {
     if (!nextPageExists()) return;
 
     setCurrentPage(prevState => prevState + 1);
+    handleOnChange();
   }
 
   const prevPage = () => {
     if (!prevPageExists()) return;
 
     setCurrentPage(prevState => prevState - 1);
+    handleOnChange();
   }
 
   const nextPageExists = () => {
@@ -65,10 +41,12 @@ const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination
 
   const goToFirstPage = () => {
     setCurrentPage(0);
+    handleOnChange();
   }
 
   const goToLastPage = () => {
     setCurrentPage(Math.floor(props.totalItems / take) - 1);
+    handleOnChange();
   }
 
   const getCurrentPage = () => {

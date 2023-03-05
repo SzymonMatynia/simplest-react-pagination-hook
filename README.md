@@ -15,7 +15,8 @@ This hook can take care of pagination in two cases:
 ###### Case: your API returns total number of items, you should use this example. (If not, another example is below)
 ```js
 import {useEffect} from 'react';
-import usePagination, {UsePaginationChangeEvent} from 'simplest-react-pagination-hook';
+import usePagination from 'simplest-react-pagination-hook';
+import {UsePaginationChangeEvent} from 'simplest-react-pagination-hook/types';
 
 const buttonClasses = 'flex items-center cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600';
 
@@ -63,7 +64,8 @@ const SomeComponentUsingPagination = () => {
 ###### In this case you can't use "Go to last page" because you don't know how many pages are there. You can only use "Go to first page", "Next page", "Prev page" buttons.
 ```js
 import {useEffect} from 'react';
-import usePagination, {UsePaginationChangeEvent} from 'simplest-react-pagination-hook';
+import usePagination from 'simplest-react-pagination-hook';
+import {UsePaginationChangeEvent} from 'simplest-react-pagination-hook/types';
 
 const buttonClasses = 'flex items-center cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600';
 
