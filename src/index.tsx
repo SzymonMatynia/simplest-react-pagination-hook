@@ -1,4 +1,10 @@
-import {ReactNode, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
+
+export interface UsePaginationChangeEvent {
+  take: number;
+  skip: number;
+  currentPage: number;
+}
 
 export interface UsePaginationProps {
   take?: number;
@@ -17,6 +23,7 @@ export interface UsePaginationProps {
   containerClassnames?: string;
   goToFirstPageClassnames?: string;
   goToLastPageClassnames?: string;
+  onChange?: (parameters: UsePaginationChangeEvent) => void;
 }
 
 export interface UsePagination {
@@ -28,6 +35,10 @@ export interface UsePagination {
 
 const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination => {
   const [currentPage, setCurrentPage] = useState<number>(0);
+
+  useEffect(() => {
+    if (props.onChange) props.onChange({take, skip: currentPage * take, currentPage});
+  }, [currentPage, take])
 
   const nextPage = () => {
     if (!nextPageExists()) return;
