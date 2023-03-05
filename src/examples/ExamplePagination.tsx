@@ -1,4 +1,3 @@
-import React = require('react');
 import usePagination, {UsePaginationProps} from '../index';
 
 const ExamplePagination = (props: UsePaginationProps) => {

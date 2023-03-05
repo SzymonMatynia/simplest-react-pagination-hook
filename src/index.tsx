@@ -1,5 +1,4 @@
 import {ReactNode, useState} from 'react';
-import React = require('react');
 
 export interface UsePaginationProps {
   take?: number;
