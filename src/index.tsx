@@ -44,7 +44,7 @@ const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination
   }
 
   const prevPageExists = () => {
-    return currentPage <= 0;
+    return currentPage > 0;
   }
 
   const getCurrentPage = () => {
