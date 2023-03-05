@@ -1,6 +1,6 @@
 {
   "name": "simplest-react-pagination-hook",
-  "version": "1.0.312",
+  "version": "1.0.313",
   "description": "This is a simple hook that allows you to easily implement pagination in your React app.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
