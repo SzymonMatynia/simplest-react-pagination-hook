@@ -1,4 +1,5 @@
-import usePagination, {UsePaginationProps} from '../index';
+import usePagination from '../index';
+import {UsePaginationProps} from '../types/use-pagination-props';
 import {useEffect} from 'react';
 
 const ExamplePagination = (props: UsePaginationProps) => {
