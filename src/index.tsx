@@ -38,7 +38,7 @@ const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination
 
   const nextPageExists = () => {
     if (props.totalItemsReferCurrentPage) {
-      return props.totalItems > take;
+      return props.totalItems === take;
     }
     return props.totalItems > (currentPage + 1) * take;
   }
