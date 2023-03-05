@@ -1,17 +1,12 @@
 import usePagination, {UsePaginationProps} from '../index';
+import {useEffect} from 'react';
 
 const ExamplePagination = (props: UsePaginationProps) => {
-  const {pagination, take, skip, currentPage} = usePagination({
-    totalItems: props.totalItems,
-    totalItemsReferCurrentPage: props.totalItemsReferCurrentPage,
-    showCurrentPage: props.showCurrentPage,
-    containerClassnames: props.containerClassnames,
-    prevPageClassnames: props.prevPageClassnames,
-    nextPageClassnames: props.nextPageClassnames,
-    currentPageClassnames: props.currentPageClassnames,
-    prevPageText: props.prevPageText,
-    nextPageText: props.nextPageText,
-  });
+  const {pagination, take, skip, currentPage} = usePagination({...props});
+
+  useEffect(() => {
+    // console.log(pagination, take, skip, currentPage);
+  }, [pagination, take, skip, currentPage])
 
   return (
     <>

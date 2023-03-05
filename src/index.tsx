@@ -3,14 +3,20 @@ import {ReactNode, useState} from 'react';
 export interface UsePaginationProps {
   take?: number;
   showCurrentPage?: boolean;
+  showGoToFirstPage?: boolean;
+  showGoToLastPage?: boolean;
   totalItems: number;
   totalItemsReferCurrentPage?: boolean;
   prevPageText?: string;
   nextPageText?: string;
+  goToFirstPageText?: string;
+  goToLastPageText?: string;
   prevPageClassnames?: string;
-  currentPageClassnames?: string;
+  pageNumberClassnames?: string;
   nextPageClassnames?: string;
   containerClassnames?: string;
+  goToFirstPageClassnames?: string;
+  goToLastPageClassnames?: string;
 }
 
 export interface UsePagination {
@@ -46,6 +52,14 @@ const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination
     return currentPage > 0;
   }
 
+  const goToFirstPage = () => {
+    setCurrentPage(0);
+  }
+
+  const goToLastPage = () => {
+    setCurrentPage(Math.floor(props.totalItems / take) - 1);
+  }
+
   const getCurrentPage = () => {
     return currentPage + 1;
   }
@@ -53,6 +67,16 @@ const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination
   const pagination = (
     <>
       <div className={props.containerClassnames}>
+        {
+          props.showGoToFirstPage ?
+            <button
+              type={'button'}
+              onClick={goToFirstPage}
+              className={props.goToFirstPageClassnames}
+              disabled={!prevPageExists()}
+            >{props.goToFirstPageText || '<<'}</button> :
+            null
+        }
         <button
           type={'button'}
           onClick={prevPage}
@@ -61,9 +85,10 @@ const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination
         >
           {props.prevPageText || 'Prev page'}
         </button>
+
         {
           props.showCurrentPage ?
-            <div className={props.currentPageClassnames}>
+            <div className={props.pageNumberClassnames}>
               {getCurrentPage()}
             </div> :
             null
@@ -76,6 +101,18 @@ const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination
         >
           {props.nextPageText || 'Next page'}
         </button>
+        {
+          (!props.totalItemsReferCurrentPage && props.showGoToLastPage) ?
+            <button
+              type={'button'}
+              onClick={goToLastPage}
+              className={props.goToLastPageClassnames}
+              disabled={!nextPageExists()}
+            >
+              {props.goToLastPageText || '>>'}
+            </button> :
+            null
+        }
       </div>
     </>
   )
