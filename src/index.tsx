@@ -1,10 +1,11 @@
 import {ReactNode, useState} from 'react';
 import React = require('react');
 
-interface Props {
+export interface UsePaginationProps {
   take?: number;
   showCurrentPage?: boolean;
   totalItems: number;
+  totalItemsReferCurrentPage?: boolean;
   prevPageText?: string;
   nextPageText?: string;
   prevPageClassnames?: string;
@@ -13,13 +14,14 @@ interface Props {
   containerClassnames?: string;
 }
 
-interface UsePagination {
+export interface UsePagination {
   pagination: ReactNode;
   take: number;
   skip: number;
+  currentPage: number;
 }
 
-const usePagination = ({take = 10, ...props}: Props): UsePagination => {
+const usePagination = ({take = 10, ...props}: UsePaginationProps): UsePagination => {
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const nextPage = () => {
@@ -29,13 +31,20 @@ const usePagination = ({take = 10, ...props}: Props): UsePagination => {
   }
 
   const prevPage = () => {
-    if (currentPage <= 0) return;
+    if (!prevPageExists()) return;
 
     setCurrentPage(prevState => prevState - 1);
   }
 
   const nextPageExists = () => {
+    if (props.totalItemsReferCurrentPage) {
+      return props.totalItems > take;
+    }
     return props.totalItems > (currentPage + 1) * take;
+  }
+
+  const prevPageExists = () => {
+    return currentPage <= 0;
   }
 
   const getCurrentPage = () => {
@@ -49,6 +58,7 @@ const usePagination = ({take = 10, ...props}: Props): UsePagination => {
           type={'button'}
           onClick={prevPage}
           className={props.prevPageClassnames}
+          disabled={!prevPageExists()}
         >
           {props.prevPageText || 'Prev page'}
         </button>
@@ -63,6 +73,7 @@ const usePagination = ({take = 10, ...props}: Props): UsePagination => {
           type={'button'}
           onClick={nextPage}
           className={props.nextPageClassnames}
+          disabled={!nextPageExists()}
         >
           {props.nextPageText || 'Next page'}
         </button>
@@ -70,7 +81,7 @@ const usePagination = ({take = 10, ...props}: Props): UsePagination => {
     </>
   )
 
-  return {pagination, take, skip: currentPage * take};
+  return {pagination, take, skip: currentPage * take, currentPage};
 }
 
 export default usePagination;
