@@ -9,7 +9,7 @@ This hook can take care of pagination in two cases:
 # Simple example
 
 ### This is how the example looks like:
-![use-pagination](https://user-images.githubusercontent.com/31554149/222981946-2966fd3a-44de-49d7-946b-5eb7e90a1d36.gif)
+![gif](https://user-images.githubusercontent.com/31554149/223577311-b1434276-05ca-469c-9a8e-aa19173d9714.gif)
 
 ### Code below:
 ###### Case: your API returns total number of items, you should use this example. (If not, another example is below)
@@ -28,18 +28,18 @@ const SomeComponentUsingPagination = () => {
     
     // Classes are provided by TailwindCSS
     const {pagination, take, skip, currentPage} = usePagination({
-        totalItems: 50,
-        showCurrentPage: true,
+        totalItems: 80,
+        pageRangeDisplayed: 5, // default is 1
         take: 10,
         onChange,
-        prevPageText: 'Prev',
-        nextPageText: 'Next',
+        prevPageText: 'Prev test',
+        nextPageText: 'Next test',
         showGoToLastPage: true,
         showGoToFirstPage: true,
         goToFirstPageClassnames: buttonClasses,
         goToLastPageClassnames: buttonClasses,
         containerClassnames: 'flex items-center gap-2 justify-center mt-8',
-        pageNumberClassnames: buttonClasses,
+        currentPageClassnames: buttonClasses,
         prevPageClassnames: buttonClasses,
         nextPageClassnames: buttonClasses,
     });
@@ -78,6 +78,7 @@ const SomeComponentUsingPagination = () => {
     // Classes are provided by TailwindCSS
     const {pagination, take, skip, currentPage} = usePagination({
         totalItems: 10, // number of items on the current page
+        pageRangeDisplayed: 5, // In this example it can only show 1 next page if take === totalItems
         totalItemsReferCurrentPage: true, // this is the only difference from the previous example, but do the trick.
         showCurrentPage: true,
         onChange,
@@ -86,6 +87,7 @@ const SomeComponentUsingPagination = () => {
         nextPageText: 'Next',
         containerClassnames: 'flex items-center gap-2',
         currentPageClassnames: buttonClasses,
+        pageClassnames: buttonClasses,
         prevPageClassnames: buttonClasses,
         nextPageClassnames: buttonClasses,
     });

@@ -1,8 +1,8 @@
 import {UsePaginationChangeEvent} from './use-pagination-change-event';
 
 export interface UsePaginationProps {
+  pageRangeDisplayed?: number;
   take?: number;
-  showCurrentPage?: boolean;
   showGoToFirstPage?: boolean;
   showGoToLastPage?: boolean;
   totalItems: number;
@@ -12,7 +12,8 @@ export interface UsePaginationProps {
   goToFirstPageText?: string;
   goToLastPageText?: string;
   prevPageClassnames?: string;
-  pageNumberClassnames?: string;
+  currentPageClassnames?: string;
+  pageClassnames?: string;
   nextPageClassnames?: string;
   containerClassnames?: string;
   goToFirstPageClassnames?: string;
