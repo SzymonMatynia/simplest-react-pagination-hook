@@ -173,7 +173,7 @@ const usePagination = ({take = 10, pageRangeDisplayed = 1, ...props}: UsePaginat
             return (
               <button key={pageIndex}
                       className={currentPage === pageIndex ? props.currentPageClassnames : props.pageClassnames}>
-                {pageIndex + 1} {currentPage === pageIndex ? '(current)' : ''}
+                {pageIndex + 1}
               </button>
             )
           })
